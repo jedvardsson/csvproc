@@ -1,0 +1,11 @@
+#/bin/bash
+
+# Implements simulated readlink to work on non GNU platforms.
+function readlink_f() {
+    ruby -e "puts File.realpath(\"$1\")"
+}
+
+PROG="$(basename $0)"
+APP_HOME=$(readlink_f "$(dirname $(readlink_f $0))/../lib")
+
+ruby $APP_HOME/csvproc.rb "$@"
