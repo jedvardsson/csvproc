@@ -1,4 +1,4 @@
-#/bin/bash
+#!/bin/bash
 
 # Implements simulated readlink to work on non GNU platforms.
 function readlink_f() {
