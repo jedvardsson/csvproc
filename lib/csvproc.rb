@@ -8,11 +8,11 @@ module CSVProc
 
     @opt_parsers = {
         'global' => OptionParser.new do |opts|
-        opts.banner = "Usage: #{PROG_NAME} [options] command
+        opts.banner = "Usage: #{PROG_NAME} [options] command [cmd_options]
 
 commands:
     help            shows help for a command
-    keyval  	    converts csv to key=value. First line contains keys.'
+    keyval  	    converts csv to key=value. First line contains keys.
         "
             opts.on('-h', '--help', 'Show help') do
                 puts opts
