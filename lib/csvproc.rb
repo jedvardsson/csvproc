@@ -12,7 +12,8 @@ module CSVProc
 
 commands:
     help            shows help for a command
-    keyval  	    converts csv to key=value. First line contains keys.
+    keyval  	    converts csv to key=value. First line of file contains key names.
+                    Escapes \\n, \\r, \\f, and \\ with backslash.
         "
             opts.on('-h', '--help', 'Show help') do
                 puts opts
@@ -57,10 +58,24 @@ commands:
                 end
                 first = false
                 row.each do | (k, v) |
-                    puts "#{k}=#{v}"
+                    puts "#{escape(k)}=#{escape(v)}"
                 end
             end
         end
+    end
+
+    @h = {
+            "\\" => Regexp.escape("\\\\"),
+            "\n" => Regexp.escape("\n"),
+            "\r" => Regexp.escape("\r"),
+            "\f" => Regexp.escape("\f"),
+    }
+
+    def self.escape(s)
+        return nil unless s
+        s.gsub(/\\|\n/) { |m|
+            @h[m]
+        }
     end
 
     begin
