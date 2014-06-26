@@ -63,6 +63,10 @@ commands:
         end
     end
 
-    parse_cmdline
+    begin
+        parse_cmdline
+    rescue Errno::EPIPE
+    end
+
 
 end # module
